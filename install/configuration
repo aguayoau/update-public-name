@@ -1,0 +1,3 @@
+APPLICATION='update-public-name'
+APPLICATIONDESC='Dinamic DNS Record A refresher'
+SERVICE='update-public-name'
