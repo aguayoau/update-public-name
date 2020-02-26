@@ -15,6 +15,17 @@ class GracefulKiller:
   def exit_gracefully(self,signum, frame):
     self.kill_now = True
 
+def WritePidFile():
+    ownpid = os.getpid()
+    try:
+        PidFile = open(Configuration['TemporaryPath'] + Configuration['Application'] + ".pid","w")
+        PidFile.write(str(ownpid))
+        PidFile.close()
+    except Exception as e:
+        return 1
+    else:
+          return 0
+
 if __name__ == '__main__':
   ConfigurationFile = open(os.getcwd()+'/inc/configuration.json', "r")
   Configuration = json.loads(ConfigurationFile.read())
@@ -22,15 +33,15 @@ if __name__ == '__main__':
   killer = GracefulKiller()
   ownpid = os.getpid()
   stream = journal.stream('cron.py')
-  result = call("echo " + str(ownpid) + " > " + Configuration['TemporaryPath'] + Configuration['Application'] + ".pid", shell=True, stdout=stream )
+  result = WritePidFile()
   timekeeper = 0
   while True:
     time.sleep(Configuration['RefreshTime'])
-    result = call("python3 " + Configuration['WorkingPath'] + Configuration['Application'] +".py", shell=True, stdout=stream )
+    result = call("python3 " + Configuration['WorkingPath'] + Configuration['Application'] +".py", shell=True )
     timekeeper = timekeeper + 1
     if timekeeper >= 360:
       ownpid = os.getpid()
-      result = call("echo " + str(ownpid) + " > " + Configuration['TemporaryPath'] + Configuration['Application'] + ".pid", shell=True, stdout=stream )
+      result = WritePidFile()
       timekeeper = 0
     if killer.kill_now:
       break
