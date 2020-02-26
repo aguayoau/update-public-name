@@ -1,16 +1,13 @@
-#!/usr/bin/python3
-import signal
-import time
+#!/usr/bin/python3 -u
 import os
 import json
 import urllib3
-from subprocess import call
 
 ConfigurationFile = open(os.getcwd()+'/inc/configuration.json', "r")
 Configuration = json.loads(ConfigurationFile.read())
 ConfigurationFile.close()
 
-if __name__ == '__main__':
+def dns_updater():
     http = urllib3.PoolManager()
     request = http.request('GET', 'http://ifconfig.co/json')
     CurrentData = json.loads(request.data.decode('utf-8'))
@@ -29,5 +26,3 @@ if __name__ == '__main__':
     else:
         print('DNS Record for ' + Configuration['PublicDNS'] + ' still the same')
     f.close()
-
-

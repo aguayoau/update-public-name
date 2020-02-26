@@ -19,8 +19,8 @@ After=syslog.target network.target
 Type=simple
 User=root
 PAMName=login
-PIDFile=/tmp/<application>.pid
-ExecStart=/opt/<application>/cron.py
+PIDFile=/run/var/<application>.pid
+ExecStart=/opt/<application>/update-public-name.py
 WorkingDirectory=/opt/<application>
 
 [Install]
@@ -30,7 +30,7 @@ _EOF_
 sed -i "s/<application>/$APPLICATION/g" /etc/systemd/system/$SERVICE.service
 sed -i "s/<application description>/$APPLICATIONDESC/g" /etc/systemd/system/$SERVICE.service
 cp  -R ../opt/$APPLICATION /opt/$APPLICATION
-chmod 755 /opt/$APPLICATION/cron.py
+chmod 755 /opt/$APPLICATION/task.py
 chmod 755 /opt/$APPLICATION/$APPLICATION.py
 
 
