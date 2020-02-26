@@ -28,7 +28,7 @@ def WritePidFile():
         return 0
 
 if __name__ == '__main__':
-    ConfigurationFile = open(os.getcwd()+'/inc/configuration.json', "r")
+    ConfigurationFile = open(os.getcwd() +'/'+ sys.argv[0] + '/inc/configuration.json', "r")
     Configuration = json.loads(ConfigurationFile.read())
     ConfigurationFile.close()
     killer = GracefulKiller()

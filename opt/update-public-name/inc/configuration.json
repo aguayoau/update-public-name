@@ -1,8 +1,0 @@
-{
-    "Application": "update-public-name",
-    "PublicDNS": "example.com",
-    "UpdateURL": "https://freedns.afraid.org/dynamic/update.php?<key",
-    "WorkingPath": "/opt/update-public-name/",
-    "TemporaryPath": "/var/run/",
-    "RefreshTime": 300
-}

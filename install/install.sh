@@ -20,7 +20,7 @@ Type=simple
 User=root
 PAMName=login
 PIDFile=/run/var/<application>.pid
-ExecStart=/opt/<application>/update-public-name.py
+ExecStart=/opt/<application>/update_public_name.py
 WorkingDirectory=/opt/<application>
 
 [Install]
