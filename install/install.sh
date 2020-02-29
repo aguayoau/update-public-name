@@ -24,7 +24,7 @@ After=syslog.target network.target
 Type=simple
 User=root
 PAMName=login
-PIDFile=/run/var/<application>.pid
+PIDFile=/run/<application>.pid
 ExecStart=/usr/bin/python3 -u /opt/<application>
 WorkingDirectory=/run/
 

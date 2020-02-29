@@ -4,5 +4,5 @@
     "UpdateURL": "https://freedns.afraid.org/dynamic/update.php?WmpkaHQ2MWJJQ2kweTZBVlVPZVY6MTg5MjM3OTQ=",
     "WorkingPath": "/opt/update_public_name/",
     "TemporaryPath": "/var/run/",
-    "RefreshTime": 5
+    "RefreshTime": 300
 }
