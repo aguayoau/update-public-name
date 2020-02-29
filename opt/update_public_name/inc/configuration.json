@@ -1,7 +1,7 @@
 {
     "Application": "update_public_name",
-    "PublicDNS": "mid.aycarambamf.com.au",
-    "UpdateURL": "https://freedns.afraid.org/dynamic/update.php?WmpkaHQ2MWJJQ2kweTZBVlVPZVY6MTg5MjM3OTQ=",
+    "PublicDNS": "example.com",
+    "UpdateURL": "https://freedns.afraid.org/dynamic/update.php?<key>",
     "WorkingPath": "/opt/update_public_name/",
     "TemporaryPath": "/var/run/",
     "RefreshTime": 300
