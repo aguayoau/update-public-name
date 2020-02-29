@@ -2,6 +2,7 @@
 import signal
 import time
 import os
+import sys
 import json
 from subprocess import call
 from dns_updater import dns_updater
@@ -28,7 +29,7 @@ def WritePidFile():
         return 0
 
 if __name__ == '__main__':
-    ConfigurationFile = open(os.getcwd() +'/'+ sys.argv[0] + '/inc/configuration.json', "r")
+    ConfigurationFile = open(sys.argv[0] + '/inc/configuration.json', "r")
     Configuration = json.loads(ConfigurationFile.read())
     ConfigurationFile.close()
     killer = GracefulKiller()
@@ -37,7 +38,6 @@ if __name__ == '__main__':
     result = WritePidFile()
     timekeeper = 0
     while True:
-        time.sleep(Configuration['RefreshTime'])
         dns_updater()
         timekeeper = timekeeper + 1
         if timekeeper >= 360:
@@ -46,3 +46,4 @@ if __name__ == '__main__':
             timekeeper = 0
         if killer.kill_now:
             break
+        time.sleep(Configuration['RefreshTime'])

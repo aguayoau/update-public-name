@@ -2,8 +2,9 @@
 import os
 import json
 import urllib3
+import sys
 
-ConfigurationFile = open(os.getcwd() +'/'+ sys.argv[0] + '/inc/configuration.json', "r")
+ConfigurationFile = open(sys.argv[0] + '/inc/configuration.json', "r")
 Configuration = json.loads(ConfigurationFile.read())
 ConfigurationFile.close()
 

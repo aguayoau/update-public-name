@@ -10,6 +10,11 @@
 
 source configuration
 
+
+apt-get update
+apt-get install python3 python3-pip
+
+
 cat << _EOF_ > /etc/systemd/system/$SERVICE.service
 [Unit]
 Description=<application description>
@@ -20,8 +25,8 @@ Type=simple
 User=root
 PAMName=login
 PIDFile=/run/var/<application>.pid
-ExecStart=/opt/<application>/update_public_name.py
-WorkingDirectory=/opt/<application>
+ExecStart=/usr/bin/python3 -u /opt/<application>
+WorkingDirectory=/run/
 
 [Install]
 WantedBy=multi-user.target
@@ -30,8 +35,7 @@ _EOF_
 sed -i "s/<application>/$APPLICATION/g" /etc/systemd/system/$SERVICE.service
 sed -i "s/<application description>/$APPLICATIONDESC/g" /etc/systemd/system/$SERVICE.service
 cp  -R ../opt/$APPLICATION /opt/$APPLICATION
-chmod 755 /opt/$APPLICATION/task.py
-chmod 755 /opt/$APPLICATION/$APPLICATION.py
+chmod 755 /opt/$APPLICATION/*.py
 
 
 systemctl daemon-reload
