@@ -18,12 +18,17 @@ def dns_updater():
         f.write('{"ip":"0.0.0.0"}')
 
     f = open(Configuration['TemporaryPath']+"ip.tmpfile", "r+")
-    OldData = json.loads(f.read())
+    try:
+        OldData = json.loads(f.read())
+    except:
+        OldData = json.loads('{"ip":"0.0.0.0"}')
+        os.remove(Configuration['TemporaryPath']+"ip.tmpfile")
+    f.close()
     if CurrentData['ip'] != OldData['ip'] :
         print('Updating DNS record for ' + Configuration['PublicDNS'] + ' from ip ' + OldData['ip'] + ' to ' + CurrentData['ip'])
-        f.seek(0)
+        f = open(Configuration['TemporaryPath']+"ip.tmpfile", "w")
         f.write(request.data.decode('utf-8'))
         request = http.request('GET', Configuration['UpdateURL'])
+        f.close()
     else:
         print('DNS Record for ' + Configuration['PublicDNS'] + ' still the same')
-    f.close()
